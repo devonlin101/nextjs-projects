@@ -1,18 +1,18 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const Post = () => {
+export default function () {
   const router = useRouter();
   const { id } = router.query;
-
+  console.log(router);
   return (
     <>
       <p>Post: {id}</p>
       <Link href="/">
-        <a>Home</a>
+        <a>
+          <strong>Home</strong>
+        </a>
       </Link>
     </>
   );
-};
-
-export default Post;
+}
