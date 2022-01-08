@@ -103,6 +103,9 @@ const EditNote = ({ note }) => {
               onChange={handleChange}
             />
             <Button type="submit">Update</Button>
+            <Link href="/">
+              <Button primary> back to home page</Button>
+            </Link>
           </Form>
         )}
       </div>

@@ -98,6 +98,9 @@ const NewNote = () => {
           </Form>
         )}
       </div>
+      <Link href="/">
+        <Button primary> go back home page</Button>
+      </Link>
     </div>
   );
 };
