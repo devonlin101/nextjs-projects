@@ -5,7 +5,7 @@ import "./styles.css";
 // `useSession()` anywhere in your application to access the `session` object.
 export default function App({
   Component,
-  pageProps: { seesion, ...pageProps },
+  pageProps: { session, ...pageProps },
 }) {
   return (
     <SessionProvider

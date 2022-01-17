@@ -6,8 +6,9 @@ import TwitterProvider from "next-auth/providers/twitter";
 import Auth0Provider from "next-auth/providers/auth0";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "./lib/mongodb";
-// import AppleProvider from "next-auth/providers/apple"
+import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
+// import AppleProvider from "next-auth/providers/apple"
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -17,6 +18,35 @@ export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   // https://next-auth.js.org/configuration/providers
   providers: [
+    /*
+    // Temporarily removing the Apple provider from the demo site as the
+    // callback URL for it needs updating due to Vercel changing domains
+      
+    Providers.Apple({
+      clientId: process.env.APPLE_ID,
+      clientSecret: {
+        appleId: process.env.APPLE_ID,
+        teamId: process.env.APPLE_TEAM_ID,
+        privateKey: process.env.APPLE_PRIVATE_KEY,
+        keyId: process.env.APPLE_KEY_ID,
+      },
+    }),
+    */
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "username", type: "text", placeholder: " jsmith" },
+        password: { label: "password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const user = { id: 1, name: "J Smith", email: "jsmith@example.com" };
+        if (user) {
+          return user;
+        } else {
+          return null;
+        }
+      },
+    }),
     EmailProvider({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
@@ -28,19 +58,6 @@ export default NextAuth({
       },
       from: process.env.EMAIL_FROM,
     }),
-    // Temporarily removing the Apple provider from the demo site as the
-    // callback URL for it needs updating due to Vercel changing domains
-    /* 
-    Providers.Apple({
-      clientId: process.env.APPLE_ID,
-      clientSecret: {
-        appleId: process.env.APPLE_ID,
-        teamId: process.env.APPLE_TEAM_ID,
-        privateKey: process.env.APPLE_PRIVATE_KEY,
-        keyId: process.env.APPLE_KEY_ID,
-      },
-    }),
-    */
     FacebookProvider({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
@@ -58,6 +75,9 @@ export default NextAuth({
     TwitterProvider({
       clientId: process.env.TWITTER_ID,
       clientSecret: process.env.TWITTER_SECRET,
+      options: {
+        version: "2.0",
+      },
     }),
     Auth0Provider({
       clientId: process.env.AUTH0_ID,
