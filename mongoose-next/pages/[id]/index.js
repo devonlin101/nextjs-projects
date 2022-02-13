@@ -1,67 +1,75 @@
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { Confirm, Button, Loader } from "semantic-ui-react";
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import dbConnect from '../../lib/dbConnect'
+import Pet from '../../models/Pet'
 
-const Note = ({ note }) => {
-  const [confirm, setConfirm] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isDeleting) {
-      deleteNote();
-    }
-  }, [isDeleting]);
-
-  const open = () => setConfirm(true);
-
-  const close = () => setConfirm(false);
-
-  const deleteNote = async () => {
-    const noteId = router.query.id;
-    try {
-      const deleted = await fetch(`http://localhost:3000/api/notes/${noteId}`, {
-        method: "Delete",
-      });
-
-      router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+/* Allows you to view pet card info and delete pet card*/
+const PetPage = ({ pet }) => {
+  const router = useRouter()
+  const [message, setMessage] = useState('')
   const handleDelete = async () => {
-    setIsDeleting(true);
-    close();
-  };
+    const petID = router.query.id
+
+    try {
+      await fetch(`/api/pets/${petID}`, {
+        method: 'Delete',
+      })
+      router.push('/')
+    } catch (error) {
+      setMessage('Failed to delete the pet.')
+    }
+  }
 
   return (
-    <div className="note-container">
-      {isDeleting ? (
-        <Loader active />
-      ) : (
-        <>
-          <h1>{note.title}</h1>
-          <p>{note.description}</p>
-          <Link href="/">
-            <Button color="blue">back</Button>
-          </Link>
-          <Button color="red" onClick={open}>
-            Delete
-          </Button>
-        </>
-      )}
-      <Confirm open={confirm} onCancel={close} onConfirm={handleDelete} />
+    <div key={pet._id}>
+      <div className="card">
+        <img src={pet.image_url} />
+        <h5 className="pet-name">{pet.name}</h5>
+        <div className="main-content">
+          <p className="pet-name">{pet.name}</p>
+          <p className="owner">Owner: {pet.owner_name}</p>
+
+          {/* Extra Pet Info: Likes and Dislikes */}
+          <div className="likes info">
+            <p className="label">Likes</p>
+            <ul>
+              {pet.likes.map((data, index) => (
+                <li key={index}>{data} </li>
+              ))}
+            </ul>
+          </div>
+          <div className="dislikes info">
+            <p className="label">Dislikes</p>
+            <ul>
+              {pet.dislikes.map((data, index) => (
+                <li key={index}>{data} </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="btn-container">
+            <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
+              <button className="btn edit">Edit</button>
+            </Link>
+            <button className="btn delete" onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      {message && <p>{message}</p>}
     </div>
-  );
-};
+  )
+}
 
-Note.getInitialProps = async ({ query: { id } }) => {
-  const res = await fetch(`http://localhost:3000/api/notes/${id}`);
-  const { data } = await res.json();
+export async function getServerSideProps({ params }) {
+  await dbConnect()
 
-  return { note: data };
-};
+  const pet = await Pet.findById(params.id).lean()
+  pet._id = pet._id.toString()
 
-export default Note;
+  return { props: { pet } }
+}
+
+export default PetPage
