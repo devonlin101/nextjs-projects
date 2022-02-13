@@ -1,6 +1,7 @@
 import Link from "next/link";
 import dbConnect from "../lib/dbConnect";
 import Pet from "../models/Pet";
+import Button from "@mui/material/Button";
 
 const Index = ({ pets }) => (
   <>
@@ -34,10 +35,12 @@ const Index = ({ pets }) => (
 
             <div className="btn-container">
               <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
-                <button className="btn edit">Edit</button>
+                <Button variant="outlined" color="success">
+                  Edit
+                </Button>
               </Link>
               <Link href="/[id]" as={`/${pet._id}`}>
-                <button className="btn view">View</button>
+                <Button variant="outlined">View</Button>
               </Link>
             </div>
           </div>

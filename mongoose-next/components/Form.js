@@ -172,23 +172,21 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
           value={form.image_url}
           name="image_url"
         />
-        <TextareaAutosize
+        <TextField
           fullWidth
-          placeholder="Likes"
+          label="Likes"
           variant="outlined"
           onChange={handleChange}
           value={form.likes}
           name="likes"
-          style={{ height: 120 }}
         />
-        <TextareaAutosize
+        <TextField
           fullWidth
-          placeholder="Dislikes"
+          label="Dislikes"
           variant="outlined"
           onChange={handleChange}
           value={form.dislikes}
           name="dislikes"
-          style={{ height: 120 }}
         />
 
         <Button type="submit" variant="contained">

@@ -1,75 +1,102 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import dbConnect from '../../lib/dbConnect'
-import Pet from '../../models/Pet'
-
+import { useRouter } from "next/router";
+import Link from "next/link";
+import dbConnect from "../../lib/dbConnect";
+import Pet from "../../models/Pet";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 /* Allows you to view pet card info and delete pet card*/
 const PetPage = ({ pet }) => {
-  const router = useRouter()
-  const [message, setMessage] = useState('')
+  const router = useRouter();
   const handleDelete = async () => {
-    const petID = router.query.id
+    const petID = router.query.id;
 
     try {
       await fetch(`/api/pets/${petID}`, {
-        method: 'Delete',
-      })
-      router.push('/')
+        method: "Delete",
+      });
+      router.push("/");
     } catch (error) {
-      setMessage('Failed to delete the pet.')
+      setMessage("Failed to delete the pet.");
     }
-  }
+  };
 
+  const styles = {
+    display: "flex",
+  };
+  const style0 = {
+    marginRight: "1rem",
+  };
   return (
-    <div key={pet._id}>
-      <div className="card">
-        <img src={pet.image_url} />
-        <h5 className="pet-name">{pet.name}</h5>
-        <div className="main-content">
-          <p className="pet-name">{pet.name}</p>
-          <p className="owner">Owner: {pet.owner_name}</p>
-
-          {/* Extra Pet Info: Likes and Dislikes */}
-          <div className="likes info">
-            <p className="label">Likes</p>
-            <ul>
-              {pet.likes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
-          </div>
-          <div className="dislikes info">
-            <p className="label">Dislikes</p>
-            <ul>
-              {pet.dislikes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="btn-container">
-            <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
-              <button className="btn edit">Edit</button>
-            </Link>
-            <button className="btn delete" onClick={handleDelete}>
-              Delete
-            </button>
-          </div>
+    <Card key={pet._id} sx={{ maxWidth: 445 }} raised="true">
+      <CardMedia
+        component="img"
+        height="250"
+        image={pet.image_url}
+        alt={pet.name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="div">
+          {pet.name}
+        </Typography>
+        <div style={styles}>
+          <strong style={style0}>Owner:</strong>
+          <p>{pet.owner_name}</p> <br />
         </div>
-      </div>
-      {message && <p>{message}</p>}
-    </div>
-  )
-}
+        <div style={styles}>
+          <h4 style={style0}>Species:</h4>
+          <p>{pet.species}</p> <br />
+        </div>
+        <div style={styles}>
+          <h4 style={style0}>Age:</h4>
+          <p>{pet.age}</p> <br />
+        </div>
+        <div style={styles}>
+          <h4 style={style0}>Diet:</h4>
+          <p>{pet.diet}</p> <br />
+        </div>
+        <div style={styles}>
+          <h4 style={style0}>Likes:</h4>
+          <p>{pet.likes}</p> <br />
+        </div>
+        <div style={styles}>
+          <h4 style={style0}>Dislikes:</h4>
+          <p>{pet.dislikes}</p> <br />
+        </div>
+        <div style={styles}>
+          <h4 style={style0}>Poddy Trained:</h4>
+          <p>{pet.poddy_trained ? "Yes" : "No"}</p> <br />
+        </div>
+        <Typography variant="body2" color="text.secondary">
+          {pet.species},{pet.age},{pet.poddy_trained ? "yes" : "no"},{pet.diet},
+          {pet.likes},{pet.dislikes}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Link href="/[id]/edit" as={`/${pet._id}/edit`}>
+          <Button size="small" color="success">
+            Edit
+          </Button>
+        </Link>
+
+        <Button onClick={handleDelete} size="small" color="error">
+          Delete
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};
 
 export async function getServerSideProps({ params }) {
-  await dbConnect()
+  await dbConnect();
 
-  const pet = await Pet.findById(params.id).lean()
-  pet._id = pet._id.toString()
+  const pet = await Pet.findById(params.id).lean();
+  pet._id = pet._id.toString();
 
-  return { props: { pet } }
+  return { props: { pet } };
 }
 
-export default PetPage
+export default PetPage;
