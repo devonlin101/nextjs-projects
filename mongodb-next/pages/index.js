@@ -1,62 +1,72 @@
-import Head from "next/head";
-import Script from "next/script";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import clientPromise from "../lib/mongodb";
+import Link from "next/link";
 
 export default function Home({ properties }) {
-  const book = async (property) => {
-    const data = await fetch(
-      `http://localhost:3000/api/book?property_id=${property._id}&guest=Ado`
-    );
-    const guest = await data.json();
-    console.log(guest);
-  };
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-        <script src="https://cdn.tailwindcss.com"></script>
-      </Head>
-
-      <div className="container mx-auto">
-        <div className="flex">
-          <div className="row w-full text-center my-4">
-            <h1 className="text-4xl font-bold mb-5">NextBnB</h1>
-          </div>
-        </div>
-        <div className="flex flex-row flex-wrap">
-          {properties &&
-            properties.map((property) => (
-              <div
-                className="flex-auto w-1/4 rounded overflow-hidden shadow-lg m-2"
-                key={property._id}
-              >
-                <img className="w-full" src={property.img} />
-                <div className="px-6 py-4">
-                  <div className="font-bold text-xl mb-2">
-                    {property.name} (Up to {property.guest} guests){" "}
-                  </div>
-                  <p>{property.address.street}</p>
-                  <p className="text-gray-700 text-base">{property.summary}</p>
-                </div>
-                <div className="text-center py-2 my-2 font-bold">
-                  <span className="text-green-500">${property.price}</span>
-                  /night
-                </div>
-                <div className="text-center py-2 my-2">
-                  <button
-                    href={"listing/" + property._id}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-5 rounded"
-                    onClick={() => book(property)}
-                  >
-                    Book
-                  </button>
-                </div>
-              </div>
-            ))}
-        </div>
-      </div>
-    </div>
+    <>
+      <Box
+        component="div"
+        sx={{ display: "flex", justifyContent: "center", marginBottom: 2 }}
+      >
+        <Link href="/new">
+          <Button variant="contained">Add a New Air Bnb property</Button>
+        </Link>
+      </Box>
+      <Container
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {properties &&
+          properties.map((property) => (
+            <Card
+              raised="true"
+              sx={{
+                maxWidth: 345,
+                margin: 1,
+              }}
+              key={property._id}
+            >
+              <CardMedia
+                component="img"
+                alt="green iguana"
+                height="150"
+                image={property.images.picture_url}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {property.name}
+                </Typography>
+                <p>{property.summary}</p>
+                <strong>property type:</strong> {property.property_type} <br />
+                <strong>beds:</strong> {property.beds}
+                <br />
+                <strong>bathrooms</strong> {property.bathrooms}
+                <br />
+                <Typography variant="body1"></Typography>
+                <strong>price:</strong> {property.price}
+              </CardContent>
+              <CardActions>
+                <Link href="/[id]" as={`/${property._id}`}>
+                  <Button variant="outlined" size="small">
+                    view detail
+                  </Button>
+                </Link>
+              </CardActions>
+            </Card>
+          ))}
+      </Container>
+    </>
   );
 }
 
@@ -73,22 +83,26 @@ export async function getServerSideProps(context) {
     .find({})
     .limit(20)
     .toArray();
-  const properties = JSON.parse(JSON.stringify(data));
-  const filtered = properties.map((property) => {
+  const filtered = data.map((property) => {
+    const bathrooms = JSON.parse(JSON.stringify(property.bathrooms));
+    const amenities = JSON.parse(JSON.stringify(property.amenities));
+    const beds = JSON.parse(JSON.stringify(property.beds));
     const price = JSON.parse(JSON.stringify(property.price));
-    const { _id, name, address, summary, accommodates, cleaning_fee } =
-      property;
 
     return {
-      _id,
-      name,
-      image: property.images.picture_url,
-      address,
-      summary,
-      guests: accommodates,
+      _id: property._id,
+      name: property.name,
+      address: property.address,
+      summary: property.summary,
+      amenities: amenities,
+      property_type: property.property_type,
+      images: property.images,
+      beds: beds,
+      bathrooms: bathrooms.$numberDecimal,
       price: price.$numberDecimal,
     };
   });
+  console.log("filtered:", filtered);
   return {
     props: { properties: filtered },
   };
