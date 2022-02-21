@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
-const Form = ({ formId, pForm, newProperty = true }) => {
+const Form = ({ pForm, newProperty = true }) => {
   const router = useRouter();
   const contentType = "application/json";
 
@@ -96,7 +96,6 @@ const Form = ({ formId, pForm, newProperty = true }) => {
         m: 2,
         "& > :not(style)": { m: 1 },
       }}
-      id={formId}
       onSubmit={handleSubmit}
     >
       <TextField

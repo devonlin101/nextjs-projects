@@ -29,7 +29,7 @@ const EditProperty = () => {
     price: property.price.$numberDecimal,
   };
 
-  return <Form formId="edit-data-form" pForm={dataForm} newProperty={false} />;
+  return <Form pForm={dataForm} newProperty={false} />;
 };
 
 export default EditProperty;

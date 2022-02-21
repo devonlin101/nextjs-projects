@@ -41,7 +41,17 @@ export default async function handler(req, res) {
       try {
         const property = await data.updateOne(
           { _id: id },
-          { $set: { name: req.body.name } }
+          {
+            $set: {
+              name: req.body.name,
+              summary: req.body.summary,
+              property_type: req.body.property_type,
+              beds: req.body.beds,
+              bathrooms: req.body.bathrooms,
+              images: req.body.images,
+              price: req.body.price,
+            },
+          }
         );
         if (!property) {
           return res.status(400).json({ success: false });

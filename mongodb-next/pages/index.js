@@ -85,9 +85,9 @@ export async function getServerSideProps(context) {
     .toArray();
   const filtered = data.map((property) => {
     const bathrooms = JSON.parse(JSON.stringify(property.bathrooms));
+    const price = JSON.parse(JSON.stringify(property.price));
     const amenities = JSON.parse(JSON.stringify(property.amenities));
     const beds = JSON.parse(JSON.stringify(property.beds));
-    const price = JSON.parse(JSON.stringify(property.price));
 
     return {
       _id: property._id,
