@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { mutate } from "swr";
-import Button from "@mui/material/Button";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import TextField from "@mui/material/TextField";
-import { FormControlLabel } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
 
 const Form = ({ formId, petForm, forNewPet = true }) => {
   const router = useRouter();
@@ -111,87 +106,88 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
   return (
     <>
       <form id={formId} onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Name"
-          variant="outlined"
-          onChange={handleChange}
-          value={form.name}
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          maxLength="20"
           name="name"
-        />
-        <TextField
-          fullWidth
-          label="Owner"
-          variant="outlined"
+          value={form.name}
           onChange={handleChange}
-          value={form.owner_name}
+          required
+        />
+
+        <label htmlFor="owner_name">Owner</label>
+        <input
+          type="text"
+          maxLength="20"
           name="owner_name"
-        />
-        <TextField
-          fullWidth
-          label="Species"
-          variant="outlined"
+          value={form.owner_name}
           onChange={handleChange}
-          value={form.species}
+          required
+        />
+
+        <label htmlFor="species">Species</label>
+        <input
+          type="text"
+          maxLength="30"
           name="species"
+          value={form.species}
+          onChange={handleChange}
+          required
         />
-        <TextField
-          fullWidth
+
+        <label htmlFor="age">Age</label>
+        <input
           type="number"
-          label="Age"
-          variant="outlined"
-          onChange={handleChange}
-          value={form.age}
           name="age"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={handleChange}
-              name="poddy_trained"
-              checked={form.poddy_trained}
-            />
-          }
-          label="Potty Trained"
-        />
-        <TextField
-          fullWidth
-          label="Diet"
-          variant="outlined"
+          value={form.age}
           onChange={handleChange}
-          value={form.diet}
+        />
+
+        <label htmlFor="poddy_trained">Potty Trained</label>
+        <input
+          type="checkbox"
+          name="poddy_trained"
+          checked={form.poddy_trained}
+          onChange={handleChange}
+        />
+
+        <label htmlFor="diet">Diet</label>
+        <textarea
           name="diet"
+          maxLength="60"
+          value={form.diet}
+          onChange={handleChange}
         />
 
-        <TextField
-          fullWidth
+        <label htmlFor="image_url">Image URL</label>
+        <input
           type="url"
-          label="Image URL"
-          variant="outlined"
-          onChange={handleChange}
-          value={form.image_url}
           name="image_url"
-        />
-        <TextField
-          fullWidth
-          label="Likes"
-          variant="outlined"
+          value={form.image_url}
           onChange={handleChange}
-          value={form.likes}
-          name="likes"
-        />
-        <TextField
-          fullWidth
-          label="Dislikes"
-          variant="outlined"
-          onChange={handleChange}
-          value={form.dislikes}
-          name="dislikes"
+          required
         />
 
-        <Button type="submit" variant="contained">
+        <label htmlFor="likes">Likes</label>
+        <textarea
+          name="likes"
+          maxLength="60"
+          value={form.likes}
+          onChange={handleChange}
+        />
+
+        <label htmlFor="dislikes">Dislikes</label>
+        <textarea
+          name="dislikes"
+          maxLength="60"
+          value={form.dislikes}
+          onChange={handleChange}
+        />
+
+        <button type="submit" className="btn">
           Submit
-        </Button>
+        </button>
       </form>
       <p>{message}</p>
       <div>

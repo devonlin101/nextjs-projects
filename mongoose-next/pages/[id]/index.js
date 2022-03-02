@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 /* Allows you to view pet card info and delete pet card*/
+
 const PetPage = ({ pet }) => {
   const router = useRouter();
   const handleDelete = async () => {
@@ -85,6 +86,9 @@ const PetPage = ({ pet }) => {
         <Button onClick={handleDelete} size="small" color="error">
           Delete
         </Button>
+        <Link href="/">
+          <Button variant="">back</Button>
+        </Link>
       </CardActions>
     </Card>
   );
@@ -95,7 +99,7 @@ export async function getServerSideProps({ params }) {
 
   const pet = await Pet.findById(params.id).lean();
   pet._id = pet._id.toString();
-
+  console.log("pet", pet);
   return { props: { pet } };
 }
 

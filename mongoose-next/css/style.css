@@ -49,6 +49,7 @@
   box-shadow: 0 0 10px 5px var(--shadow);
   position: relative;
   font-size: 100%;
+  cursor: pointer;
 }
 
 .card:hover {
