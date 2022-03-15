@@ -1,6 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
@@ -16,57 +18,39 @@ const Header: React.FC = () => {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
       </Head>
-      <div className="left">
+      <ButtonGroup variant="text" aria-label="text button group">
         <Link href="/">
-          <a className="bold" data-active={isActive("/")}>
+          <Button
+            className="bold"
+            data-active={isActive("/")}
+            sx={{ color: "#000" }}
+          >
             Blog
-          </a>
+          </Button>
         </Link>
         <Link href="/drafts">
-          <a data-active={isActive("/drafts")}>Drafts</a>
+          <Button data-active={isActive("/drafts")} sx={{ color: "#000" }}>
+            Drafts
+          </Button>
         </Link>
-      </div>
-      <div className="right">
+      </ButtonGroup>
+      <ButtonGroup variant="outlined" aria-label="outlined button group">
         <Link href="/signup">
-          <a data-active={isActive("/signup")}>Signup</a>
+          <Button data-active={isActive("/signup")}>Signup</Button>
         </Link>
         <Link href="/create">
-          <a data-active={isActive("/create")}>+ Create draft</a>
+          <Button data-active={isActive("/create")}>Create draft</Button>
         </Link>
-      </div>
+      </ButtonGroup>
       <style jsx>{`
         nav {
           display: flex;
+          justify-content: space-between;
           padding: 2rem;
           align-items: center;
         }
-
-        .bold {
-          font-weight: bold;
-        }
-
-        a {
-          text-decoration: none;
-          color: #000;
-          display: inline-block;
-        }
-
-        .left a[data-active="true"] {
+        button[data-active="true"] {
           color: gray;
-        }
-
-        a + a {
-          margin-left: 1rem;
-        }
-
-        .right {
-          margin-left: auto;
-        }
-
-        .right a {
-          border: 0.5px solid black;
-          border-radius: 20px;
-          padding: 0.5rem 1rem;
         }
       `}</style>
     </nav>

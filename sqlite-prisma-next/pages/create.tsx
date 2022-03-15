@@ -1,61 +1,75 @@
-import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import Router from 'next/router'
+import React, { useState } from "react";
+import Layout from "../components/Layout";
+import Router from "next/router";
+import Link from "next/link";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 const Draft: React.FC = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [authorEmail, setAuthorEmail] = useState('')
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [authorEmail, setAuthorEmail] = useState("");
 
   const submitData = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const body = { title, content, authorEmail }
+      const body = { title, content, authorEmail };
       await fetch(`http://localhost:3000/api/post`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
-      })
-      await Router.push('/drafts')
+      });
+      await Router.push("/drafts");
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   return (
     <Layout>
       <div>
-        <form
-          onSubmit={submitData}>
-          <h1>Create Draft</h1>
-          <input
+        <form onSubmit={submitData}>
+          <Typography variant="h3" gutterBottom component="div">
+            Create Draft
+          </Typography>
+          <TextField
             autoFocus
-            onChange={e => setTitle(e.target.value)}
-            placeholder="Title"
+            onChange={(e) => setTitle(e.target.value)}
+            variant="outlined"
+            label="title"
             type="text"
             value={title}
+            fullWidth
+            sx={{ bgcolor: "#fff" }}
           />
-          <input
-            onChange={e => setAuthorEmail(e.target.value)}
-            placeholder="Author (email address)"
+          <TextField
+            onChange={(e) => setAuthorEmail(e.target.value)}
+            label="Author (email address)"
             type="text"
             value={authorEmail}
+            fullWidth
+            sx={{ bgcolor: "#fff", margin: "0.5rem auto" }}
           />
-          <textarea
-            cols={50}
-            onChange={e => setContent(e.target.value)}
-            placeholder="Content"
-            rows={8}
+          <TextField
+            multiline
+            onChange={(e) => setContent(e.target.value)}
+            label="Content"
+            minRows={8}
             value={content}
+            fullWidth
+            sx={{ bgcolor: "#fff", margin: "0.5rem auto" }}
           />
-          <input
+          <Button
+            variant="contained"
             disabled={!content || !title || !authorEmail}
             type="submit"
-            value="Create"
-          />
-          <a className="back" href="#" onClick={() => Router.push('/')}>
-            or Cancel
-          </a>
+          >
+            Create
+          </Button>
+          <Link href="/">
+            <a>or Cancel</a>
+          </Link>
         </form>
       </div>
       <style jsx>{`
@@ -67,7 +81,7 @@ const Draft: React.FC = () => {
           align-items: center;
         }
 
-        input[type='text'],
+        input[type="text"],
         textarea {
           width: 100%;
           padding: 0.5rem;
@@ -76,18 +90,17 @@ const Draft: React.FC = () => {
           border: 0.125rem solid rgba(0, 0, 0, 0.2);
         }
 
-        input[type='submit'] {
+        input[type="submit"] {
           background: #ececec;
           border: 0;
           padding: 1rem 2rem;
         }
-
-        .back {
+        a {
           margin-left: 1rem;
         }
       `}</style>
     </Layout>
-  )
-}
+  );
+};
 
 export default Draft;
