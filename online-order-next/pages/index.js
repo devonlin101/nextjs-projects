@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Row, Col } from "antd";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
   UserOutlined,
@@ -6,9 +7,17 @@ import {
   NotificationOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
+import { Collapse } from "antd";
 
+const { Panel } = Collapse;
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
 
 export default function Home() {
   return (
@@ -16,8 +25,8 @@ export default function Home() {
       <Header className="header">
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">TaiPei Chinese Kitchen Inc.</Menu.Item>
-          <Menu.Item key="4">
+          <Menu.Item key="1">TAIPEI CHINESE KITCHEN</Menu.Item>
+          <Menu.Item key="2">
             <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} />
           </Menu.Item>
         </Menu>
@@ -40,39 +49,78 @@ export default function Home() {
               <Menu.Item key="3">DOUBLE ENTREE</Menu.Item>
               <Menu.Item key="4">MANAGER SPECIAL</Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-              <Menu.Item key="5">option5</Menu.Item>
-              <Menu.Item key="6">option6</Menu.Item>
-              <Menu.Item key="7">option7</Menu.Item>
-              <Menu.Item key="8">option8</Menu.Item>
+            <SubMenu
+              key="sub2"
+              icon={<LaptopOutlined />}
+              title="CHEF'S SPECIALTIES"
+            >
+              <Menu.Item key="5">BEEF AND SCALLOP</Menu.Item>
+              <Menu.Item key="6">HAPPY FAMILY</Menu.Item>
+              <Menu.Item key="7">TRIPLE DELIGHT</Menu.Item>
+              <Menu.Item key="8">FOUR SEASONS</Menu.Item>
+              <Menu.Item key="9">HAVEN EARTH</Menu.Item>
+              <Menu.Item key="10">SEAFOOD DELIGHT</Menu.Item>
             </SubMenu>
             <SubMenu
               key="sub3"
               icon={<NotificationOutlined />}
-              title="subnav 3"
+              title="DIET MENU"
             >
-              <Menu.Item key="9">option9</Menu.Item>
-              <Menu.Item key="10">option10</Menu.Item>
-              <Menu.Item key="11">option11</Menu.Item>
-              <Menu.Item key="12">option12</Menu.Item>
+              <Menu.Item key="11">MIXED VEGETABLES</Menu.Item>
+              <Menu.Item key="12">BEAN CURD WITH VEGETABLES</Menu.Item>
+              <Menu.Item key="13">CHICKEN WITH VEGETABLES</Menu.Item>
+              <Menu.Item key="14" danger="true">
+                SHRIMP WITH VEGETABLES
+              </Menu.Item>
             </SubMenu>
           </Menu>
         </Sider>
-        <Layout style={{ padding: "0 24px 24px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
-            Content
+        <Layout>
+          <Content className="site-layout-background">
+            <Collapse accordion>
+              <Panel header="Hot Case Specials" key="1">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Chef's Specialties" key="2">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Diet Menu" key="3">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Appetizers" key="4">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Soup" key="5">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Fried Rice" key="6">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Lo Mein" key="7">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Chow Mein" key="8">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Poultry" key="9">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Beef" key="10">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Seafood" key="11">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Vegetable" key="12">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Egg Foo Young" key="13">
+                <p>{text}</p>
+              </Panel>
+              <Panel header="Side Order" key="14">
+                <p>{text}</p>
+              </Panel>
+            </Collapse>
           </Content>
         </Layout>
       </Layout>
