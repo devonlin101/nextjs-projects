@@ -7,28 +7,26 @@ const fetcher = (url) =>
     .then((res) => res.json())
     .then((json) => json.data);
 
-const EditPet = () => {
+const EditFood = () => {
   const router = useRouter();
   const { id } = router.query;
   console.log("router:", router);
-  const { data: pet, error } = useSWR(id ? `/api/pets/${id}` : null, fetcher);
+  const { data: food, error } = useSWR(id ? `/api/foods/${id}` : null, fetcher);
 
   if (error) return <p>Failed to load</p>;
-  if (!pet) return <p>Loading...</p>;
+  if (!food) return <p>Loading...</p>;
 
-  const petForm = {
-    name: pet.name,
-    owner_name: pet.owner_name,
-    species: pet.species,
-    age: pet.age,
-    poddy_trained: pet.poddy_trained,
-    diet: pet.diet,
-    image_url: pet.image_url,
-    likes: pet.likes,
-    dislikes: pet.dislikes,
+  const foodForm = {
+    name: food.name,
+    country_origin: food.country_origin,
+    recipe: food.recipe,
+    cooking_method: food.cooking_method,
+    image_url: food.image_url,
   };
 
-  return <Form formId="edit-pet-form" petForm={petForm} forNewPet={false} />;
+  return (
+    <Form formId="edit-food-form" foodForm={foodForm} forNewFood={false} />
+  );
 };
 
-export default EditPet;
+export default EditFood;

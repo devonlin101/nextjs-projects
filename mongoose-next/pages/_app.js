@@ -2,7 +2,8 @@ import "../css/style.css";
 import "../css/form.css";
 import Link from "next/link";
 import Head from "next/head";
-import Avatar from "@mui/material/Avatar";
+import Image from "next/image";
+import Logo from "../public/food-logo.png";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -11,7 +12,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Pet Care App</title>
+        <title>Food App</title>
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -25,11 +26,7 @@ function MyApp({ Component, pageProps }) {
           margin: "1rem auto",
         }}
       >
-        <Avatar
-          src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Pet_logo_with_flowers.png"
-          alt="pet care logo"
-          sx={{ width: 80, height: 80 }}
-        />
+        <Image src={Logo} alt="food logo" width={120} height={60} />
         <ButtonGroup variant="text" size="large">
           <Link href="/">
             <Button className="nav">
@@ -38,7 +35,7 @@ function MyApp({ Component, pageProps }) {
           </Link>
           <Link href="/new">
             <Button className="nav">
-              <a>Add Pet</a>
+              <a>Add Food</a>
             </Button>
           </Link>
         </ButtonGroup>
