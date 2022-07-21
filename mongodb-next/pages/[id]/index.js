@@ -45,11 +45,7 @@ export default function index({ property }) {
           <br />
           <strong>beds:</strong> {JSON.parse(JSON.stringify(property.beds))}
           <br />
-          <strong>bathrooms:</strong>{" "}
-          {JSON.parse(JSON.stringify(property.bathrooms.$numberDecimal))}
-          <br />
-          <strong>price:</strong>{" "}
-          {JSON.parse(JSON.stringify(property.price.$numberDecimal))}
+          <strong>property description:</strong> {property.description}
         </CardContent>
         <CardActions>
           <Link href="/[id]/edit" as={`/${property._id}/edit`}>

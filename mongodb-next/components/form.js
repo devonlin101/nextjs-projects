@@ -12,8 +12,9 @@ const Form = ({ pForm, newProperty = true }) => {
 
   const [form, setForm] = useState({
     name: pForm.name,
-    summary: pForm.summary,
     property_type: pForm.property_type,
+    summary: pForm.summary,
+    description: pForm.description,
     beds: pForm.beds,
     bathrooms: pForm.bathrooms,
     images: pForm.images,
@@ -39,9 +40,9 @@ const Form = ({ pForm, newProperty = true }) => {
         throw new Error(res.status);
       }
 
-      const { data } = await res.json();
+      // const { data } = await res.json();
 
-      mutate(`/api/properties/${id}`, data, false); // Update the local data without a revalidation
+      // mutate(`/api/properties/${id}`, data, false); // Update the local data without a revalidation
       router.push("/");
     } catch (error) {
       console.error(error.message);
@@ -105,6 +106,13 @@ const Form = ({ pForm, newProperty = true }) => {
         onChange={handleChange}
         required
       />
+      <TextField
+        label="Property Type"
+        name="property_type"
+        value={form.property_type}
+        onChange={handleChange}
+        required
+      />
 
       <TextField
         label="Summary"
@@ -117,9 +125,9 @@ const Form = ({ pForm, newProperty = true }) => {
       />
 
       <TextField
-        label="Property Type"
-        name="property_type"
-        value={form.property_type}
+        label="Property Description"
+        name="description"
+        value={form.description}
         onChange={handleChange}
         required
       />
@@ -134,14 +142,6 @@ const Form = ({ pForm, newProperty = true }) => {
       />
 
       <TextField
-        type="number"
-        label="Bathrooms"
-        name="bathrooms"
-        value={form.bathrooms}
-        onChange={handleChange}
-        required
-      />
-      <TextField
         label="Image Url"
         name="images"
         value={form.images}
@@ -149,15 +149,8 @@ const Form = ({ pForm, newProperty = true }) => {
         required
       />
 
-      <TextField
-        label="Price"
-        name="price"
-        value={form.price}
-        onChange={handleChange}
-        required
-      />
       <Button type="submit" variant="contained">
-        Submit
+        {newProperty ? "Submit" : "Update"}
       </Button>
       <Link href="/">
         <Button variant="outlined">Back</Button>

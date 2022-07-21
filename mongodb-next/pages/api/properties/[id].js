@@ -44,10 +44,10 @@ export default async function handler(req, res) {
           {
             $set: {
               name: req.body.name,
-              summary: req.body.summary,
               property_type: req.body.property_type,
+              summary: req.body.summary,
+              description: req.body.description,
               beds: req.body.beds,
-              bathrooms: req.body.bathrooms,
               images: req.body.images,
               price: req.body.price,
             },

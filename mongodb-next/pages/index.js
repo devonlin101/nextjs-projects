@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import clientPromise from "../lib/mongodb";
 import Link from "next/link";
 
-export default function Home({ properties }) {
+export default function Home({ airbnb }) {
   return (
     <>
       <Box
@@ -27,8 +27,8 @@ export default function Home({ properties }) {
           justifyContent: "center",
         }}
       >
-        {properties &&
-          properties.map((property) => (
+        {airbnb &&
+          airbnb.map((property) => (
             <Card
               raised="true"
               sx={{
@@ -49,12 +49,11 @@ export default function Home({ properties }) {
                 </Typography>
                 <p>{property.summary}</p>
                 <strong>property type:</strong> {property.property_type} <br />
-                <strong>beds:</strong> {property.beds}
-                <br />
-                <strong>bathrooms</strong> {property.bathrooms}
+                <strong>property space:</strong> {property.space} <br />
+                <strong>property description:</strong>
+                {property.description}
                 <br />
                 <Typography variant="body1"></Typography>
-                <strong>price:</strong> {property.price}
               </CardContent>
               <CardActions>
                 <Link href="/[id]" as={`/${property._id}`}>
@@ -70,40 +69,24 @@ export default function Home({ properties }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   // client.db() will be the default database passed in the MONGODB_URI
   // You can change the database by calling the client.db() function and specifying a database like:
   // const db = client.db("myDatabase");
   // Then you can execute queries against your database like so:
   // db.find({}) or any of the MongoDB Node Driver commands
+
   const client = await clientPromise;
   const data = await client
     .db()
     .collection("listingsAndReviews")
     .find({})
-    .limit(20)
+    .limit(10)
     .toArray();
-  const filtered = data.map((property) => {
-    const bathrooms = JSON.parse(JSON.stringify(property.bathrooms));
-    const price = JSON.parse(JSON.stringify(property.price));
-    const amenities = JSON.parse(JSON.stringify(property.amenities));
-    const beds = JSON.parse(JSON.stringify(property.beds));
 
-    return {
-      _id: property._id,
-      name: property.name,
-      address: property.address,
-      summary: property.summary,
-      amenities: amenities,
-      property_type: property.property_type,
-      images: property.images,
-      beds: beds,
-      bathrooms: bathrooms.$numberDecimal,
-      price: price.$numberDecimal,
-    };
-  });
-  console.log("filtered:", filtered);
+  const airbnb = JSON.parse(JSON.stringify(data));
+  console.log("airbnb:", airbnb);
   return {
-    props: { properties: filtered },
+    props: { airbnb },
   };
 }

@@ -24,9 +24,7 @@ const EditProperty = () => {
     summary: property.summary,
     property_type: property.property_type,
     beds: property.beds,
-    bathrooms: property.bathrooms.$numberDecimal,
-    images: property.images.picture_url,
-    price: property.price.$numberDecimal,
+    images: property.images,
   };
 
   return <Form pForm={dataForm} newProperty={false} />;
