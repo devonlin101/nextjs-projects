@@ -9,22 +9,25 @@ export default function About() {
         implementing professional websites from the ground up, and able to
         complete projects efficiently and satisfy customers with attractive,
         user-friendly websites. Fast learner, hard worker and team player who is
-        proficient in javascript and Rust programming language.
+        proficient in javaScript and Rust programming language.
       </p>
       <p className="font-serifs indent-8">
         {" "}
         I immigrated to the United States from China when I was 18 year old.
-        After dropping out of college at the end of 2012, I worked as a delivery
-        driver in a small chinese restaurant till late year of 2018. Then I was
-        thinking about my future, so I searched online for better, high pay
-        careers without a college degree. Web developer and software engineer
-        showed up on my computer screen. I have loved playing games since I was
-        child which including gameboy, computer games etc. and I have already
-        spent quarter of life on game. Web Developer and software engineering is
-        about using code to build applications and games. I also believe myself
-        to be a smart, intelligent and clever guy. Since then, I have been
-        studying web development and proficient in Javascript and Rust
-        programming languages till now.
+        After dropping out of college around the end of 2012, I worked as a
+        delivery driver in a small Chinese restaurant till late 2018. I saved up
+        and took a break from a delivery driving job, starting to plan my
+        future. I searched online for better, high pay careers without any
+        college degree. The software engineer and web developer show up with
+        many other better high pay careers that do not require a degree. Why did
+        I choose to be a web developer? Web developers and software engineers
+        are all about coding, algorithm and data structure, and how to
+        manipulate these skills to build applications and games. First, I have
+        spent a quarter of my life playing a variety of games, and one third of
+        my life with a computer. Second, I also believe myself to be a smart,
+        intelligent and clever guy. Since then, I have been self-studying web
+        development and striving to become proficient in JavaScript and Rust
+        programming languages intermittently.
       </p>
     </div>
   );
