@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-export default function Footer(params: type) {
+export default function Footer() {
   return (
     <div className="text-center">
       <div>
