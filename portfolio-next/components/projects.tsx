@@ -3,7 +3,7 @@ export default function Projects() {
   return (
     <div className="tabcontent" id="projects">
       <h1 className="p-5 m-6 text-4xl font-bold text-center">PROJECTS</h1>
-      <div className="pcontainer">
+      <div className="flex flex-wrap pcontainer">
         <div className="card">
           <div className="card-header">
             <img
@@ -14,7 +14,9 @@ export default function Projects() {
           <div className="card-body">
             <span className="tag tag-teal">Technology</span>
             <h4>Why is the Tesla Cybertruck designed the way it is?</h4>
-            <p>An exploration into the truck's polarising design</p>
+            <p className="font-serifs">
+              An exploration into the truck's polarising design
+            </p>
             <div className="user">
               <img
                 src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
@@ -37,7 +39,7 @@ export default function Projects() {
           <div className="px-6 py-4 card-body">
             <span className="tag tag-purple">Popular</span>
             <h4>How to Keep Going When You Don’t Know What’s Next</h4>
-            <p>
+            <p className="font-serifs">
               The future can be scary, but there are ways to deal with that
               fear.
             </p>
@@ -63,7 +65,7 @@ export default function Projects() {
           <div className="card-body">
             <span className="tag tag-pink">Design</span>
             <h4>10 Rules of Dashboard Design</h4>
-            <p>Dashboard Design Guidelines</p>
+            <p className="font-serifs">Dashboard Design Guidelines</p>
             <div className="user">
               <img
                 src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg"
