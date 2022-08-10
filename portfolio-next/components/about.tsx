@@ -23,11 +23,11 @@ export default function About() {
         I choose to be a web developer? Web developers and software engineers
         are all about coding, algorithm and data structure, and how to
         manipulate these skills to build applications and games. First, I have
-        spent a quarter of my life playing a variety of games, and one third of
-        my life with a computer. Second, I also believe myself to be a smart,
-        intelligent and clever guy. Since then, I have been self-studying web
-        development and striving to become proficient in JavaScript and Rust
-        programming languages intermittently.
+        consumed a quarter of my life playing variety of games, and spent one
+        third of my life with a laptop computer . Second, I also believe myself
+        to be a smart, intelligent and clever guy. Since then, I have been
+        self-studying web development and striving to become proficient in
+        JavaScript and Rust programming languages intermittently.
       </p>
     </div>
   );

@@ -38,6 +38,11 @@ export default function Home() {
               <Icon icon="logos:sass" width="30" height="30" />
             </a>
           </abbr>
+          <abbr title="tailwind css" className="">
+            <a href="https://tailwindcss.com/">
+              <Icon icon="logos:tailwindcss-icon" width="30" height="30" />
+            </a>
+          </abbr>
           <abbr title="javascript">
             <a href="https://www.javascript.com/">
               <Icon icon="logos:javascript" width="30" height="30" />
@@ -123,7 +128,7 @@ export default function Home() {
           </abbr>
         </div>
       </div>
-      <div className="flex justify-center p-2 m-3 iterm-center gap-3 social">
+      <div className="flex justify-center p-2 mt-6 iterm-center gap-3 social">
         <abbr title="github">
           <a href="https://github.com/devonlin101">
             <Icon icon="akar-icons:github-fill" width="25" height="25" />
