@@ -26,6 +26,13 @@ export default function Footer() {
               </a>
             </abbr>
           </li>
+          <li>
+            <abbr title="stripe">
+              <a href="https://buy.stripe.com/test_8wM28YfGwaeHfLO000">
+                <Icon icon="cib:cc-stripe" width="25" height="25" />
+              </a>
+            </abbr>
+          </li>
         </ul>
       </div>
       <div>all copyright &copy; dl101 llc</div>
