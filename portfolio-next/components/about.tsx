@@ -12,22 +12,25 @@ export default function About() {
         proficient in javaScript and Rust programming language.
       </p>
       <p className="font-serifs indent-8">
-        {" "}
         I immigrated to the United States from China when I was 18 year old.
-        After dropping out of college around the end of 2012, I worked as a
+        After dropping out of college around the end of year 2012, I worked as a
         delivery driver in a small Chinese restaurant till late 2018. I saved up
-        and took a break from a delivery driving job, starting to plan my
-        future. I searched online for better, high pay careers without any
-        college degree. The software engineer and web developer show up with
-        many other better high pay careers that do not require a degree. Why did
-        I choose to be a web developer? Web developers and software engineers
-        are all about coding, algorithm and data structure, and how to
-        manipulate these skills to build applications and games. First, I have
-        consumed a quarter of my life playing variety of games, and spent one
-        third of my life with a laptop computer . Second, I also believe myself
-        to be a smart, intelligent and clever guy. Since then, I have been
-        self-studying web development and striving to become proficient in
-        JavaScript and Rust programming languages intermittently.
+        and took a break from a delivery driving job, then started to search for
+        a better career. I looked up online for high pay careers that does not
+        required any college degree. Then the software engineer and web
+        developer show up with many other better high pay careers on the list.
+      </p>
+      <p className="font-serifs indent-8">
+        Why did I choose to be a web developer? Web developers and Software
+        engineers are all about coding, system design, algorithm and data
+        structure, and how to manipulate these skills to build applications and
+        games. First, I have consumed a quarter of my life playing variety of
+        games, spent one third of my life with a computer. Second, also I
+        believe myself to be a smart, intelligent, clever, detail oriented and
+        hard working guy, these are traits for a successful web developer and
+        software developer . Since then, I have been self-studying web
+        development and striving to become proficient in JavaScript and Rust
+        programming languages intermittently.
       </p>
     </div>
   );

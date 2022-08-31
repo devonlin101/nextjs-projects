@@ -1,27 +1,7 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import { projects } from "../data/projects";
 
-const projects = [
-  {
-    title: "Portfolio -- Kevin Lin",
-    image: "/portfolio.png",
-    description: "A simple portfolio website built with nextjs and tailwindcss",
-    github:
-      "https://github.com/devonlin101/nextjs-projects/tree/master/portfolio-next",
-    preview: "https://kevinlin01.vercel.app",
-    logos: ["logos:nextjs-icon", "logos:tailwindcss-icon"],
-  },
-  {
-    title: "YouTube Clone",
-    image: "/portfolio.png",
-    description:
-      "A simple YouTube clone website built with reactjs and styled-components",
-    github:
-      "https://github.com/devonlin101/nextjs-projects/tree/master/portfolio-next",
-    preview: "https://kevinlin01.vercel.app",
-    logos: ["vscode-icons:file-type-reactjs", "simple-icons:styledcomponents"],
-  },
-];
 export default function Projects() {
   return (
     <div className="tabcontent" id="projects">
@@ -30,7 +10,12 @@ export default function Projects() {
         {projects.map((project) => (
           <div className="card">
             <div className="card-header">
-              <Image src={project.image} width={300} height={290} alt="rover" />
+              <Image
+                src={project.image}
+                width={300}
+                height={290}
+                alt="project screenshot"
+              />
             </div>
             <div className="card-body">
               <span className="flex items-center justify-center w-full gap-3">
