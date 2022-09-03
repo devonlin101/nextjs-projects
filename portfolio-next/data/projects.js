@@ -10,7 +10,7 @@ export const projects = [
   },
   {
     title: "YouTube Clone",
-    image: "/youtube_clone.png ",
+    image: "/youtubeclone.png ",
     description:
       "A YouTube clone website built with reactjs, material ui and styled-components",
     github:
