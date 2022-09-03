@@ -22,15 +22,15 @@ export default function About() {
       </p>
       <p className="font-serifs indent-8">
         Why did I choose to be a web developer? Web developers and Software
-        engineers are all about coding, system design, algorithm and data
-        structure, and how to manipulate these skills to build applications and
-        games. First, I have consumed a quarter of my life playing variety of
-        games, spent one third of my life with a computer. Second, also I
-        believe myself to be a smart, intelligent, clever, detail oriented and
-        hard working guy, these are traits for a successful web developer and
-        software developer . Since then, I have been self-studying web
-        development and striving to become proficient in JavaScript and Rust
-        programming languages intermittently.
+        engineers are all about coding, system design, algorithm, data structure
+        and problem solving, and how to manipulate these skills to build fully
+        functional applications and games. First, I have consumed a quarter of
+        my life playing variety of games, spent one third of my life with a
+        computer. Second, also I believe myself to be a smart, intelligent,
+        clever, detail oriented and hard working guy, these are traits for a
+        successful web developer and software developer . Since then, I have
+        been self-studying web development and striving to become proficient in
+        JavaScript and Rust programming languages intermittently.
       </p>
     </div>
   );
