@@ -12,6 +12,7 @@ export default function Projects() {
             <div className="card-header">
               <Image
                 src={project.image}
+                loading="lazy"
                 width={300}
                 height={290}
                 alt="project screenshot"
